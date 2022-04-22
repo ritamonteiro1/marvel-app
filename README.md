@@ -1,5 +1,7 @@
 Estudando fragments e navigation
 
+##
+
 Tecnologias:
 - Kotlin
 - Glide
@@ -9,3 +11,5 @@ Tecnologias:
 - Room
 - Flow
 - StateFlow
+
+##
