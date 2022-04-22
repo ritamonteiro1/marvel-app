@@ -1,5 +1,6 @@
-package daniel.lop.io.marvelappstarter.data.model
+package daniel.lop.io.marvelappstarter.data.model.character
 
-data class Thumbnail (
+data class Thumbnail(
     val path: String,
-    val extension: String)
+    val extension: String
+)

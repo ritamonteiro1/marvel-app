@@ -5,4 +5,5 @@ import java.io.Serializable
 
 data class ComicData(
     @SerializedName("results")
-    val result: List<Comic>): Serializable
+    val result: List<Comic>
+) : Serializable
