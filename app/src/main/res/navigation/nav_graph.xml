@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/detailsCharacterFragment"
         android:name="daniel.lop.io.marvelappstarter.ui.details.DetailsCharacterFragment"
-        android:label="DetailsCharacterFragment" >
+        android:label="DetailsCharacterFragment">
         <argument
             android:name="characterId"
             app:argType="daniel.lop.io.marvelappstarter.data.model.character.Character" />
@@ -15,7 +15,7 @@
     <fragment
         android:id="@+id/favoriteCharacterFragment"
         android:name="daniel.lop.io.marvelappstarter.ui.favorite.FavoriteCharacterFragment"
-        android:label="FavoriteCharacterFragment" >
+        android:label="FavoriteCharacterFragment">
         <action
             android:id="@+id/action_favoriteCharacterFragment_to_detailsCharacterFragment"
             app:destination="@id/detailsCharacterFragment" />
@@ -23,7 +23,7 @@
     <fragment
         android:id="@+id/listCharacterFragment"
         android:name="daniel.lop.io.marvelappstarter.ui.list.ListCharacterFragment"
-        android:label="ListCharacterFragment" >
+        android:label="ListCharacterFragment">
         <action
             android:id="@+id/action_listCharacterFragment_to_detailsCharacterFragment"
             app:destination="@id/detailsCharacterFragment" />
@@ -31,7 +31,7 @@
     <fragment
         android:id="@+id/searchCharacterFragment"
         android:name="daniel.lop.io.marvelappstarter.ui.search.SearchCharacterFragment"
-        android:label="SearchCharacterFragment" >
+        android:label="SearchCharacterFragment">
         <action
             android:id="@+id/action_searchCharacterFragment_to_detailsCharacterFragment"
             app:destination="@id/detailsCharacterFragment" />
