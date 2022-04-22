@@ -9,6 +9,7 @@ Tecnologias:
 - Coroutines
 - Retrofit
 - Room
+- Hilt
 - Flow
 - StateFlow
 
