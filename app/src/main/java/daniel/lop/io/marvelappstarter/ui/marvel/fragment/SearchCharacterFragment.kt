@@ -1,11 +1,12 @@
-package daniel.lop.io.marvelappstarter.ui.search
+package daniel.lop.io.marvelappstarter.ui.marvel.fragment
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import daniel.lop.io.marvelappstarter.databinding.FragmentSearchCharacterBinding
-import daniel.lop.io.marvelappstarter.ui.base.BaseFragment
+import daniel.lop.io.marvelappstarter.ui.marvel.fragment.BaseFragment
+import daniel.lop.io.marvelappstarter.ui.marvel.viewmodel.SearchCharacterViewModel
 
 @AndroidEntryPoint
 class SearchCharacterFragment :

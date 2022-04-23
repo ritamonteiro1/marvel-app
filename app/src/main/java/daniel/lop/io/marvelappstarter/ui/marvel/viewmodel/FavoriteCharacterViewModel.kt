@@ -1,4 +1,4 @@
-package daniel.lop.io.marvelappstarter.ui.favorite
+package daniel.lop.io.marvelappstarter.ui.marvel.viewmodel
 
 import androidx.lifecycle.ViewModel
 

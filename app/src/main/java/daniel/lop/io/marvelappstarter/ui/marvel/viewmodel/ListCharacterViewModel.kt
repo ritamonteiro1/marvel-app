@@ -1,4 +1,4 @@
-package daniel.lop.io.marvelappstarter.ui.list
+package daniel.lop.io.marvelappstarter.ui.marvel.viewmodel
 
 import androidx.lifecycle.ViewModel
 

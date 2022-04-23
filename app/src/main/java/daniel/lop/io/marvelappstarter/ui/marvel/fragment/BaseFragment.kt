@@ -1,4 +1,4 @@
-package daniel.lop.io.marvelappstarter.ui.base
+package daniel.lop.io.marvelappstarter.ui.marvel.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
