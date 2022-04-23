@@ -15,7 +15,7 @@ interface ServiceApi {
     ): Response<CharacterResult>
 
     @GET("characters/{characterId}/comic")
-    suspend fun getComic(
+    suspend fun getComicList(
         @Path(value = "characterId", encoded = true) characterId: Int
     ): Response<ComicResult>
 
