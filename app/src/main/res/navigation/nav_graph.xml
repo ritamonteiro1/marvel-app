@@ -11,8 +11,11 @@
         android:label="DetailsCharacterFragment"
         tools:layout="@layout/fragment_details_character">
         <argument
-            android:name="character"
-            app:argType="daniel.lop.io.marvelappstarter.data.model.character.Character" />
+            android:name="characterModel"
+            app:argType="daniel.lop.io.marvelappstarter.data.model.character.CharacterModel" />
+        <action
+            android:id="@+id/action_detailsCharacterFragment_to_splashActivity"
+            app:destination="@id/splashActivity" />
     </fragment>
     <fragment
         android:id="@+id/favoriteCharacterFragment"
@@ -41,4 +44,9 @@
             android:id="@+id/action_searchCharacterFragment_to_detailsCharacterFragment"
             app:destination="@id/detailsCharacterFragment" />
     </fragment>
+    <activity
+        android:id="@+id/splashActivity"
+        android:name="daniel.lop.io.marvelappstarter.ui.splash.SplashActivity"
+        android:label="activity_splash"
+        tools:layout="@layout/activity_splash" />
 </navigation>

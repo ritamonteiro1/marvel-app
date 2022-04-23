@@ -30,16 +30,16 @@ class ListCharacterFragment : BaseFragment<FragmentListCharacterBinding, ListCha
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         setOnClickListenerCharacterItem()
-        getCharacterList()
+        setupObserver()
     }
 
-    private fun getCharacterList() = lifecycleScope.launch {
+    private fun setupObserver() = lifecycleScope.launch {
         viewModel.characterList.collect{ resourceState ->
             when(resourceState){
                 is ResourceState.Success -> {
                     resourceState.data?.let { values ->
                         binding.progressCircular.hide()
-                        characterListAdapter.characters = values.data.results.toList()
+                        characterListAdapter.characterModels = values.data.results.toList()
                     }
 
                 }
@@ -59,10 +59,10 @@ class ListCharacterFragment : BaseFragment<FragmentListCharacterBinding, ListCha
     }
 
     private fun setOnClickListenerCharacterItem() {
-        characterListAdapter.setOnClickListener { character ->
+        characterListAdapter.setOnClickListener { characterModel ->
             val action =
                 ListCharacterFragmentDirections.actionListCharacterFragmentToDetailsCharacterFragment(
-                    character
+                    characterModel
                 )
             findNavController().navigate(action)
         }

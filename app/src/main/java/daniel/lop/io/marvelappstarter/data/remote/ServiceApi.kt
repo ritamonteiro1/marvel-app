@@ -14,7 +14,7 @@ interface ServiceApi {
         @Query("nameStartWith") nameStartWith: String? = null
     ): Response<CharacterResult>
 
-    @GET("characters/{characterId}/comic")
+    @GET("characters/{characterId}/comics")
     suspend fun getComicList(
         @Path(value = "characterId", encoded = true) characterId: Int
     ): Response<ComicResult>

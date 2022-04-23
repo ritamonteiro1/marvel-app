@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import daniel.lop.io.marvelappstarter.data.model.comic.Comic
+import daniel.lop.io.marvelappstarter.data.model.comic.ComicModel
 import daniel.lop.io.marvelappstarter.databinding.ItemComicBinding
 import daniel.lop.io.marvelappstarter.utils.loadImage
 
@@ -14,21 +14,21 @@ class ComicListAdapter : RecyclerView.Adapter<ComicListAdapter.ComicViewHolder>(
     inner class ComicViewHolder(val binding: ItemComicBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    private val differCallback = object : DiffUtil.ItemCallback<Comic>() {
-        override fun areItemsTheSame(oldItem: Comic, newItem: Comic): Boolean {
+    private val differCallback = object : DiffUtil.ItemCallback<ComicModel>() {
+        override fun areItemsTheSame(oldItem: ComicModel, newItem: ComicModel): Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
 
-        override fun areContentsTheSame(oldItem: Comic, newItem: Comic): Boolean {
+        override fun areContentsTheSame(oldItem: ComicModel, newItem: ComicModel): Boolean {
             return oldItem.id == newItem.id && oldItem.title == newItem.title && oldItem.description == newItem.description &&
-                    oldItem.thumbnail.path == newItem.thumbnail.path && oldItem.thumbnail.extension == newItem.thumbnail.extension
+                    oldItem.thumbnailModel.path == newItem.thumbnailModel.path && oldItem.thumbnailModel.extension == newItem.thumbnailModel.extension
         }
 
     }
 
     private val differ = AsyncListDiffer(this, differCallback)
 
-    var comics: List<Comic>
+    var comicModels: List<ComicModel>
         get() = differ.currentList
         set(value) = differ.submitList(value)
 
@@ -42,17 +42,17 @@ class ComicListAdapter : RecyclerView.Adapter<ComicListAdapter.ComicViewHolder>(
         )
     }
 
-    override fun getItemCount(): Int = comics.size
+    override fun getItemCount(): Int = comicModels.size
 
     override fun onBindViewHolder(holder: ComicViewHolder, position: Int) {
-        val comic = comics[position]
+        val comic = comicModels[position]
         holder.binding.apply {
             tvNameComic.text = comic.title
             tvDescriptionComic.text = comic.description
             loadImage(
                 imgComic,
-                comic.thumbnail.path,
-                comic.thumbnail.extension
+                comic.thumbnailModel.path,
+                comic.thumbnailModel.extension
             )
         }
     }

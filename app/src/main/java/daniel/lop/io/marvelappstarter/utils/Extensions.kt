@@ -12,7 +12,6 @@ fun Fragment.toast(message: String, duration: Int = Toast.LENGTH_SHORT) {
         message,
         duration
     ).show()
-
 }
 
 fun View.show() {

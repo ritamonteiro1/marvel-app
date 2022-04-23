@@ -2,15 +2,4 @@ Estudando fragments e navigation
 
 ##
 
-Tecnologias:
-- Kotlin
-- Glide
-- Arquitetura MVVM
-- Coroutines
-- Retrofit
-- Room
-- Hilt
-- Flow
-- StateFlow
-
-##
+<img height="480px" src="images_read_me/image.png">

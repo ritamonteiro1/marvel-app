@@ -7,12 +7,12 @@ plugins {
 }
 
 android {
-    compileSdk 30
+    compileSdk 31
 
     defaultConfig {
         applicationId "daniel.lop.io.marvelappstarter"
         minSdk 22
-        targetSdk 30
+        targetSdk 31
         versionCode 1
         versionName "1.0"
 
@@ -51,7 +51,7 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
     // Room
-    def room_version = "2.3.0"
+    def room_version = "2.4.2"
 
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"

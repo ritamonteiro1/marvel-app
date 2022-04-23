@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import daniel.lop.io.marvelappstarter.R
 import daniel.lop.io.marvelappstarter.databinding.ItemCharacterBinding
-import daniel.lop.io.marvelappstarter.data.model.character.Character
+import daniel.lop.io.marvelappstarter.data.model.character.CharacterModel
 import daniel.lop.io.marvelappstarter.utils.limitDescription
 import daniel.lop.io.marvelappstarter.utils.loadImage
 
@@ -16,21 +16,21 @@ class CharacterListAdapter : RecyclerView.Adapter<CharacterListAdapter.Character
     inner class CharacterViewHolder(val binding: ItemCharacterBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    private val differCallback = object : DiffUtil.ItemCallback<Character>() {
+    private val differCallback = object : DiffUtil.ItemCallback<CharacterModel>() {
 
-        override fun areItemsTheSame(oldItem: Character, newItem: Character): Boolean {
+        override fun areItemsTheSame(oldItem: CharacterModel, newItem: CharacterModel): Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
 
-        override fun areContentsTheSame(oldItem: Character, newItem: Character): Boolean {
+        override fun areContentsTheSame(oldItem: CharacterModel, newItem: CharacterModel): Boolean {
             return oldItem.id == newItem.id && oldItem.name == newItem.name && oldItem.description == newItem.description &&
-                    oldItem.thumbnail.path == newItem.thumbnail.path && oldItem.thumbnail.extension == newItem.thumbnail.extension
+                    oldItem.thumbnailModel.path == newItem.thumbnailModel.path && oldItem.thumbnailModel.extension == newItem.thumbnailModel.extension
         }
 
     }
     private val differ = AsyncListDiffer(this, differCallback)
 
-    var characters: List<Character>
+    var characterModels: List<CharacterModel>
         get() = differ.currentList
         set(value) = differ.submitList(value)
 
@@ -42,10 +42,10 @@ class CharacterListAdapter : RecyclerView.Adapter<CharacterListAdapter.Character
         )
     }
 
-    override fun getItemCount(): Int = characters.size
+    override fun getItemCount(): Int = characterModels.size
 
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
-        val character = characters[position]
+        val character = characterModels[position]
         holder.binding.apply {
             tvNameCharacter.text = character.name
             if (character.description == "") {
@@ -57,8 +57,8 @@ class CharacterListAdapter : RecyclerView.Adapter<CharacterListAdapter.Character
             }
             loadImage(
                 imgCharacter,
-                character.thumbnail.path,
-                character.thumbnail.extension
+                character.thumbnailModel.path,
+                character.thumbnailModel.extension
             )
         }
         holder.itemView.setOnClickListener {
@@ -68,13 +68,13 @@ class CharacterListAdapter : RecyclerView.Adapter<CharacterListAdapter.Character
         }
     }
 
-    private var onItemClickListener: ((Character) -> Unit)? = null
+    private var onItemClickListener: ((CharacterModel) -> Unit)? = null
 
-    fun setOnClickListener(listener: (Character) -> Unit) {
+    fun setOnClickListener(listener: (CharacterModel) -> Unit) {
         onItemClickListener = listener
     }
 
-    fun getCharacterPosition(position: Int): Character {
-        return characters[position]
+    fun getCharacterPosition(position: Int): CharacterModel {
+        return characterModels[position]
     }
 }

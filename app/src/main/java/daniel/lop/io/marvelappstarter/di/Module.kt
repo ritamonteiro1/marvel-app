@@ -1,11 +1,17 @@
 package daniel.lop.io.marvelappstarter.di
 
+import android.content.Context
+import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import daniel.lop.io.marvelappstarter.data.cache.MarvelDatabase
 import daniel.lop.io.marvelappstarter.data.remote.ServiceApi
 import daniel.lop.io.marvelappstarter.utils.Constants
+import daniel.lop.io.marvelappstarter.utils.Constants.BASE_URL
+import daniel.lop.io.marvelappstarter.utils.Constants.DATABASE_NAME
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -16,27 +22,44 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import javax.inject.Singleton
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 object Module {
 
     @Singleton
     @Provides
+    fun provideMarvelDatabase(
+        @ApplicationContext context: Context
+    ) = Room.databaseBuilder(
+        context,
+        MarvelDatabase::class.java,
+        DATABASE_NAME
+    ).build()
+
+    @Singleton
+    @Provides
+    fun provideMarvelDao(database: MarvelDatabase) = database.marvelDao()
+
+
+    @Singleton
+    @Provides
     fun provideOkHttpClient(): OkHttpClient {
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
+
         return OkHttpClient().newBuilder()
             .addInterceptor { chain ->
-                val currencyTimetamp = System.currentTimeMillis()
-                val newUrl = chain.request().url.newBuilder()
-                    .addQueryParameter(Constants.TS, currencyTimetamp.toString())
+                val currentTimestamp = System.currentTimeMillis()
+                val newUrl = chain.request().url
+                    .newBuilder()
+                    .addQueryParameter(Constants.TS, currentTimestamp.toString())
                     .addQueryParameter(Constants.API_KEY, Constants.PUBLIC_KEY)
                     .addQueryParameter(
                         Constants.HASH,
-                        provideToMd5Hash(currencyTimetamp.toString() + Constants.PRIVATE_KEY + Constants.PUBLIC_KEY)
-                    ).build()
+                        provideToMd5Hash(currentTimestamp.toString() + Constants.PRIVATE_KEY + Constants.PUBLIC_KEY)
 
+                    )
+                    .build()
                 val newRequest = chain.request()
                     .newBuilder()
                     .url(newUrl)
@@ -51,11 +74,10 @@ object Module {
     @Provides
     fun provideRetrofit(client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL)
-            .addConverterFactory(
-                GsonConverterFactory.create()
-            )
-            .client(client).build()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
     }
 
     @Singleton

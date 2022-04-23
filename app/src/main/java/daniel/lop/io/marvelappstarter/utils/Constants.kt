@@ -7,4 +7,7 @@ object Constants {
     const val API_KEY = "apikey"
     const val HASH = "hash"
     const val TS = "ts"
+    const val LAST_SEARCH_QUERY = "last_search_query"
+    const val DEFAULT_QUERY = ""
+    const val DATABASE_NAME = "marvel.db"
 }
